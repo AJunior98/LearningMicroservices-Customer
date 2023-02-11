@@ -15,7 +15,7 @@ public class CustomerService {
     @Inject
     private CustomerRepository customerRepository;
 
-    private List<CustomerDTO> findAllCustomers() {
+    public List<CustomerDTO> findAllCustomers() {
         List<CustomerDTO> customers = new ArrayList<>();
 
         customerRepository.findAll().stream().forEach(item -> {
@@ -23,6 +23,26 @@ public class CustomerService {
         });
 
         return customers;
+    }
+
+    public void createNewCustomer(CustomerDTO customerDTO) {
+        customerRepository.persist(mapCustomerDTOToEntity(customerDTO));
+    }
+
+    public void changeCustomer(Long id, CustomerDTO customerDTO){
+        CustomerEntity customer = customerRepository.findById(id);
+
+        customer.setName(customerDTO.getName());
+        customer.setAddress(customerDTO.getAddress());
+        customer.setPhone(customer.getPhone());
+        customer.setEmail(customer.getEmail());
+        customer.setAge(customer.getAge());
+
+        customerRepository.persist(customer);
+    }
+
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
     }
 
     private CustomerDTO mapCustomerEntityToDTO(CustomerEntity customer) {
@@ -35,6 +55,18 @@ public class CustomerService {
         customerDTO.setPhone(customer.getPhone());
 
         return customerDTO;
+    }
+
+    private CustomerEntity mapCustomerDTOToEntity(CustomerDTO customer) {
+        CustomerEntity customerEntity = new CustomerEntity();
+
+        customerEntity.setAddress(customer.getAddress());
+        customerEntity.setAge(customer.getAge());
+        customerEntity.setEmail(customer.getEmail());
+        customerEntity.setName(customer.getName());
+        customerEntity.setPhone(customer.getPhone());
+
+        return customerEntity;
     }
 
 }
