@@ -15,6 +15,11 @@ public class CustomerService {
     @Inject
     private CustomerRepository customerRepository;
 
+    public CustomerDTO findCustomerById(Long id){
+        CustomerEntity customerEntity = customerRepository.findById(id);
+        return mapCustomerEntityToDTO(customerEntity);
+    }
+
     public List<CustomerDTO> findAllCustomers() {
         List<CustomerDTO> customers = new ArrayList<>();
 

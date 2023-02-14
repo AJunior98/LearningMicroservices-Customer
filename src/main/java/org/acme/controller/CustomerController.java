@@ -17,6 +17,13 @@ public class CustomerController {
     CustomerService customerService;
 
     @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public CustomerDTO findCustomerById(@PathParam("id") Long id) {
+        return customerService.findCustomerById(id);
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<CustomerDTO> findAllCustomers() {
         return customerService.findAllCustomers();
