@@ -53,6 +53,7 @@ public class CustomerService {
     private CustomerDTO mapCustomerEntityToDTO(CustomerEntity customer) {
         CustomerDTO customerDTO = new CustomerDTO();
 
+        customerDTO.setId(customer.getId());
         customerDTO.setAddress(customer.getAddress());
         customerDTO.setAge(customer.getAge());
         customerDTO.setEmail(customer.getEmail());
@@ -65,6 +66,7 @@ public class CustomerService {
     private CustomerEntity mapCustomerDTOToEntity(CustomerDTO customer) {
         CustomerEntity customerEntity = new CustomerEntity();
 
+        customerEntity.setId(customer.getId());
         customerEntity.setAddress(customer.getAddress());
         customerEntity.setAge(customer.getAge());
         customerEntity.setEmail(customer.getEmail());
